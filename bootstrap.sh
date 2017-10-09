@@ -30,15 +30,16 @@ cp /home/pi/.bashrc $HOME/.bashrc
 # Install ssh keys
 export $HOME/.bashrc
 
-[[ ! -d $HOME/.ssh ]] && mkdir $HOME/.ssh && chmod 600 $HOME/.ssh
+[[ ! -d $HOME/.ssh ]] && mkdir $HOME/.ssh && chmod 700 $HOME/.ssh
 [[ ! -e $HOME/.ssh/authorized_keys ]] && aws s3 cp s3://us-east-2-rpi-creds/id_rsa.pub $HOME/.ssh/authorized_keys
 [[ ! -e $HOME/.ssh/id_rsa ]] && aws s3 cp s3://us-east-2-rpi-creds/id_rsa $HOME/.ssh/id_rsa
 
 chmod 600 $HOME/.ssh/authorized_keys
 chmod 600 $HOME/.ssh/id_rsa
 
+# Set up git repo
 
-aws s3 cp 
+
 
 
 
