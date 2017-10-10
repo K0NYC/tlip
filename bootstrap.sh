@@ -16,16 +16,21 @@ pip install boto3
 # Set AWS creds
 mkdir $HOME/.aws
 cat <<EOF > $HOME/.aws/credentials
-AWS_ACCESS_KEY_ID='$1'
-AWS_SECRET_ACCESS_KEY='$2'
-AWS_DEFAULT_REGION='us-east-2'
+[default]
+AWS_ACCESS_KEY_ID=$1
+AWS_SECRET_ACCESS_KEY=$2
+AWS_DEFAULT_REGION=us-east-2
+EOF
+
+cat <<EOF > $HOME/.aws/config
+[default]
+region = us-east-2
 EOF
 
 # Set aliases for pi
 cat <<EOF >> /home/pi/.bashrc
 alias ll='ls -alFG'
 alias python=python3
-
 EOF
 
 # Copy .bashrc file to the root user for fancy prompt and aliases
