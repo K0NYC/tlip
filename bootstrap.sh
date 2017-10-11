@@ -1,9 +1,6 @@
 #!/bin/bash -x
 
-if [[ ! $(grep -q dtoverlay=w1-gpio /boot/config.txt) ]]
-then 
-	echo "dtoverlay=w1-gpio" >> /boot/config.txt
-fi
+grep -q dtoverlay=w1-gpio /boot/config.txt || echo "dtoverlay=w1-gpio" >> /boot/config.txt
 
 apt-get -y update
 apt-get -y upgrade
@@ -80,3 +77,6 @@ EOF
 	chmod +x /etc/init.d/boot_script.sh
 	update-rc.d /etc/init.d/boot_script.sh defaults
 fi
+
+# Disable password auth over ssh
+grep -q "PasswordAuthentication no" /etc/ssh/ssh_config || echo 'PasswordAuthentication no' >> /etc/ssh/ssh_config
