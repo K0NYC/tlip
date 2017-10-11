@@ -52,6 +52,13 @@ mkdir -p /opt/gits
 cd /opt/gits
 git clone git@github.com:seledkinpylesos/rpi.git
 
+# Create boot script for modprobe
+cat <<EOF > /etc/init.d/boot_script.sh
+#!/bin/bash -ex
 
+modprobe w1-gpio
+modprobe w1-therm
+EOF
 
-
+chmod +x /etc/init.d/boot_script.sh
+update-rc.d /etc/init.d/boot_script.sh defaults
