@@ -68,6 +68,16 @@ fi
 if [[ ! -e /etc/init.d/boot_script.sh ]]
 then
 	cat <<EOF > /etc/init.d/boot_script.sh
+### BEGIN INIT INFO
+# Provides:          boot_script.sh
+# Required-Start:    $remote_fs
+# Required-Stop:     $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Run modprobe for digital temperature sensor
+# Description:       Enable service provided by daemon.
+### END INIT INFO
+
 #!/bin/bash -ex
 
 modprobe w1-gpio
