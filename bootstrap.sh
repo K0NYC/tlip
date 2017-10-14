@@ -6,7 +6,7 @@ apt-get -y update
 apt-get -y upgrade
 
 # Install necessary software
-apt-get install -y git python3-w1thermsensor python3-pigpio
+apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate
 pip install awscli --upgrade
 pip install boto3
 
