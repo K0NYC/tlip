@@ -6,9 +6,10 @@ apt-get -y update
 apt-get -y upgrade
 
 # Install necessary software
-apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate
+apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate npm
 pip install awscli --upgrade
 pip install boto3
+npm install -g npm@3.x
 
 # Set AWS creds and config
 if [[ ! -e $HOME/.aws/credentials ]]
@@ -90,3 +91,12 @@ fi
 
 # Disable password auth over ssh
 grep -q "PasswordAuthentication no" /etc/ssh/ssh_config || echo 'PasswordAuthentication no' >> /etc/ssh/ssh_config
+
+# Install Node-Red
+bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
+systemctl enable nodered.service
+cd $HOME/.node-red/
+npm install node-red-contrib-ds18b20 node-red-contrib-aws-iot-hub node-red-node-aws node-red-contrib-aws
+
+reboot
+
