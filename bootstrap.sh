@@ -6,7 +6,7 @@ apt-get -y update
 apt-get -y upgrade
 
 # Install necessary software
-apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate npm
+apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate npm build-essential
 pip install awscli --upgrade
 pip install boto3
 npm install -g npm@3.x
@@ -31,12 +31,13 @@ region = us-east-1
 EOF
 fi
 
-# Set aliases for pi
+# Set aliases and PATH for pi
 if [[ ! $(grep -q "alias ll='ls -alFG'" /home/pi/.bashrc) ]]
 then
 	cat <<EOF >> /home/pi/.bashrc
 alias ll='ls -alFG'
 alias python=python3
+export PATH=$PATH:/usr/local/bin/aws:/usr/bin/npm
 EOF
 fi
 
@@ -93,10 +94,11 @@ fi
 grep -q "PasswordAuthentication no" /etc/ssh/ssh_config || echo 'PasswordAuthentication no' >> /etc/ssh/ssh_config
 
 # Install Node-Red
-bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
+yes | bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)
 systemctl enable nodered.service
+ln -s /usr/bin/nodejs /usr/bin/node
 cd $HOME/.node-red/
-npm install node-red-contrib-ds18b20 node-red-contrib-aws-iot-hub node-red-node-aws node-red-contrib-aws
-
+npm install node-red-contrib-ds18b20 node-red-contrib-aws-iot-hub node-red-node-aws node-red-contrib-aws node-red-node-pi-gpiod
+sudo systemctl enable nodered.service
 reboot
 
