@@ -98,7 +98,7 @@ yes | bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-pa
 systemctl enable nodered.service
 ln -s /usr/bin/nodejs /usr/bin/node
 cd $HOME/.node-red/
-npm install node-red-contrib-ds18b20 node-red-contrib-aws-iot-hub node-red-node-aws node-red-contrib-aws node-red-node-pi-gpiod
+npm install node-red-contrib-ds18b20 node-red-contrib-aws-iot-hub node-red-node-aws node-red-contrib-aws node-red-node-pi-gpiod node-red-dashboard
 sudo systemctl enable nodered.service
 reboot
 
