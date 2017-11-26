@@ -6,9 +6,10 @@ apt-get -y update
 apt-get -y upgrade
 
 # Install necessary software
-apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate npm build-essential
+apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate npm build-essential mosquitto
 pip install awscli --upgrade
 pip install boto3
+pip3 install paho-mqtt
 npm install -g npm@3.x
 
 # Set AWS creds and config
@@ -98,7 +99,7 @@ yes | bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-pa
 systemctl enable nodered.service
 ln -s /usr/bin/nodejs /usr/bin/node
 cd $HOME/.node-red/
-npm install node-red-contrib-ds18b20 node-red-contrib-aws-iot-hub node-red-node-aws node-red-contrib-aws node-red-node-pi-gpiod node-red-dashboard
+npm install node-red-contrib-ds18b20 node-red-contrib-aws-iot-hub node-red-node-aws node-red-contrib-aws node-red-node-pi-gpiod node-red-dashboard node-red-contrib-moment
 sudo systemctl enable nodered.service
 reboot
 
