@@ -6,7 +6,7 @@ apt-get -y update
 apt-get -y upgrade
 
 # Install necessary software
-apt-get install -y git python3-w1thermsensor python3-pigpio python-pip python3-pip locate npm build-essential mosquitto
+apt-get install -y git python3-w1thermsensor python-pip python3-pip locate npm build-essential mosquitto
 pip install awscli --upgrade
 pip install boto3
 pip3 install paho-mqtt
