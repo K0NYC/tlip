@@ -1,21 +1,28 @@
 #!/usr/bin/env python3
 
 import paho.mqtt.client as mqtt
-import logging
+import RPi.GPIO as GPIO
 
-logger =
+# Define GPIO mode
+GPIO.setmode(GPIO.BOARD)
+
+# Define pins
+relay = 26 #GPIO 7
+GPIO.setwarnings (False)
+GPIO.setup(relay, GPIO.OUT)
+
 
 # This is the Subscriber
 
 def on_connect(client, userdata, flags, rc):
-  print("Connected with result code "+str(rc))
-  client.subscribe("/livingroom/AC/power")
+	print("Connected with result code "+str(rc))
+	client.subscribe("/livingroom/AC/power")
 
 def on_message(client, userdata, msg):
-  if msg.payload.decode() == "on":
-    gpoi on
-  elif msg.payload.decode() == "off":
-      gpio off
+	if msg.payload.decode() == "on":
+		GPIO.output(relay, True)
+	elif msg.payload.decode() == "off":
+		GPIO.output(relay, False)
 
 
 client = mqtt.Client()
